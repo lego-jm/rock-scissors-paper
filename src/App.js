@@ -41,6 +41,7 @@ function App() {
     setComUrl(imgObj[imgArr[randomNumber]].url);
     setUrl(imgObj[play].url);
     setResult(playResult(play, imgArr[randomNumber]));
+    resultTitle();
   };
 
   const playResult = (user, computer) => {
@@ -59,9 +60,11 @@ function App() {
     }
   };
 
-  if(result === 'Winner') myResult = 'Win';
-  else if(result === 'Loser') myResult = 'Lose';
-  else myResult = 'Tie';
+  const resultTitle = () => {
+    if(result === 'Winner') myResult = 'Win';
+    else if(result === 'Loser') myResult = 'Lose';
+    else myResult = 'Tie';
+  }
 
   return (
     <div className='container'>

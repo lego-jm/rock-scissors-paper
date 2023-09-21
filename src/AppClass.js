@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import BoxClass from './components/BoxClass';
+import React, { Component } from 'react';
 import './App.css';
+import BoxClass from './components/BoxClass';
 
 const imgObj = {
   rock: {
@@ -18,16 +18,27 @@ const imgObj = {
 }
 
 export default class AppClass extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super();
     this.state = {
       url: '',
       comUrl: '',
       result: ''
-    }
+    };
+    this.myResult = '';
   }
 
-  myResult;
+  handleClick = (play) => {
+    const imgArr = Object.keys(imgObj);
+    const randomNumber = Math.floor(Math.random() * imgArr.length);
+
+    this.setState({
+      url: imgObj[play].url,
+      comUrl: imgObj[imgArr[randomNumber]].url,
+      result: this.playResult(play, imgArr[randomNumber])
+    });
+    this.resultTitle();
+  };
 
   playResult = (user, computer) => {
     if(user === 'rock') {
@@ -45,26 +56,13 @@ export default class AppClass extends Component {
     }
   };
 
-  handleClick = (play) => {
-    const imgArr = Object.keys(imgObj);
-    const randomNumber = Math.floor(Math.random() * imgArr.length);
-    
-    this.setState({
-      url: imgObj[play].url,
-      comUrl: imgObj[imgArr[randomNumber]].url,
-      result: this.playResult(play, imgArr[randomNumber])
-    });
-
-    /* setComUrl(imgObj[imgArr[randomNumber]].url);
-    setUrl(imgObj[play].url);
-    setResult(playResult(play, imgArr[randomNumber])); */
-  };
-
-  render() {
+  resultTitle = () => {
     if(this.state.result === 'Winner') this.myResult = 'Win';
     else if(this.state.result === 'Loser') this.myResult = 'Lose';
     else this.myResult = 'Tie';
-    
+  }
+
+  render() {
     return (
       <div className='container'>
         <div className='box_wrap'>

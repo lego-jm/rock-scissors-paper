@@ -32,6 +32,7 @@ function App() {
   const [url, setUrl] = useState('');
   const [comUrl, setComUrl] = useState('');
   const [result, setResult] = useState('');
+  let myResult;
 
   const handleClick = (play) => {
     const imgArr = Object.keys(imgObj);
@@ -58,6 +59,10 @@ function App() {
     }
   };
 
+  if(result === 'Winner') myResult = 'Win';
+  else if(result === 'Loser') myResult = 'Lose';
+  else myResult = 'Tie';
+
   return (
     <div className='container'>
       <div className='box_wrap'>
@@ -69,6 +74,7 @@ function App() {
         <button onClick={() => {handleClick('rock')}}>바위</button>
         <button onClick={() => {handleClick('paper')}}>보</button>
       </div>
+      <h1>{myResult}</h1>
     </div>
   );
 }

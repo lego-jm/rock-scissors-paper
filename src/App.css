@@ -34,3 +34,18 @@
   display: flex;
   gap: 10px;
 }
+
+.winner {
+  color: green;
+  border-color: green;
+}
+
+.loser {
+  color: red;
+  border-color: red;
+}
+
+.tie {
+  color: #000;
+  border-color: #000;
+}

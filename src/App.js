@@ -31,6 +31,7 @@ const imgObj = {
 function App() {
   const [url, setUrl] = useState('');
   const [comUrl, setComUrl] = useState('');
+  const [result, setResult] = useState('');
 
   const handleClick = (play) => {
     const imgArr = Object.keys(imgObj);
@@ -38,13 +39,30 @@ function App() {
 
     setComUrl(imgObj[imgArr[randomNumber]].url);
     setUrl(imgObj[play].url);
+    setResult(playResult(play, imgArr[randomNumber]));
+  };
+
+  const playResult = (user, computer) => {
+    if(user === 'rock') {
+      if(computer === 'scissors') return 'Winner';
+      else if(computer === 'paper') return 'Loser';
+      else return 'Tie';
+    } else if(user === 'scissors') {
+      if(computer === 'paper') return 'Winner';
+      else if(computer === 'rock') return 'Loser';
+      else return 'Tie';
+    } else if(user === 'paper') {
+      if(computer === 'rock') return 'Winner';
+      else if(computer === 'scissors') return 'Loser';
+      else return 'Tie';
+    }
   };
 
   return (
     <div className='container'>
       <div className='box_wrap'>
-        <Box title='You' url={url} />
-        <Box title='Computer' url={comUrl} />
+        <Box title='You' url={url} result={result} />
+        <Box title='Computer' url={comUrl} result={result} />
       </div>
       <div className='button_wrap'>
         <button onClick={() => {handleClick('scissors')}}>가위</button>
